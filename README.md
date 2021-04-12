@@ -5,9 +5,9 @@
 ```shell
 git clone git@github.com:tmicka23/click-n-co-client.git
 cd click-n-co-client
-cp .env.sample .env // copy the API key received by email instead of [YOUR API KEY]
+cp .env.sample .env # copy the API key received by email instead of [YOUR API KEY]
 npm install
-npm start // open your favorite browser and go to http://localhost:8080/
+npm start # open your favorite browser and go to http://localhost:8080/
 ```
 
 ### Compiles and hot-reloads for development
