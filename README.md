@@ -1,24 +1,29 @@
 # click-n-co-client
 
 ## Project setup
-```
-yarn install
+
+```shell
+git clone git@github.com:tmicka23/click-n-co-client.git
+cd click-n-co-client
+cp .env.sample .env // copy the API key received by email instead of [YOUR API KEY]
+npm install
+npm start // open your favorite browser and go to http://localhost:8080/
 ```
 
 ### Compiles and hot-reloads for development
-```
-yarn serve
+
+```shell
+npm start
 ```
 
 ### Compiles and minifies for production
-```
-yarn build
+
+```shell
+npm run build
 ```
 
 ### Lints and fixes files
-```
-yarn lint
-```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```shell
+npm run lint
+```
