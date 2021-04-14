@@ -1,5 +1,9 @@
 # click-n-co-client
 
+## Node version :
+
+**14.16.1**
+
 ## Project setup
 
 ```shell

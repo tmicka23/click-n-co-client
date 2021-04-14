@@ -2,7 +2,7 @@
   <div>
     <aside class="cart" id="cart" :class="handleOpen">
       <button class="close" @click="handleClose">X</button>
-      <h2>My Orders</h2>
+      <h2>My Order</h2>
       <div class="cart-total-count">Total items : {{ cart.total_items }}</div>
       <p v-if="!cart.line_items[0]" class="no-cart-item">No food selected</p>
       <div class="cart-items" v-if="cart.line_items[0]">
