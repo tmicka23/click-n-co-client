@@ -7,24 +7,36 @@
     <div class="navbar-end">
       <a href="#foods">Foods</a>
 
-      <img class="navbar-cart" :src="cart" alt="cart" @click="handleCartOpen" />
+      <div class="navbar-cart">
+        <img :src="cartImg" alt="cart" @click="handleCartOpen" />
+        <span v-if="cart.total_items > 0" class="badge">{{
+          cart.total_items
+        }}</span>
+      </div>
     </div>
   </nav>
 </template>
 
 <script>
 import logo from "../assets/click-n-co.png";
-import cart from "../assets/cart.svg";
+import cartImg from "../assets/cart.svg";
+import CartStore from "../stores/CartStore/CartStore";
+import { mapGetters } from "vuex";
 export default {
   name: "Navbar",
+  store: CartStore,
   props: {
     handleCartOpen: Function,
   },
   data() {
     return {
       logo,
-      cart,
+      cartImg,
     };
+  },
+
+  computed: {
+    ...mapGetters(["cart"]),
   },
 };
 </script>
@@ -55,9 +67,26 @@ export default {
 }
 
 .navbar-cart {
+  position: relative;
   &:hover {
     cursor: pointer;
   }
+}
+
+.navbar .badge {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  top: -10px;
+  right: -10px;
+  background: #ee5253;
+  color: white;
+  font-size: 12px;
+  padding: 2px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (min-width: 768px) {

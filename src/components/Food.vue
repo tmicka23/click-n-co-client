@@ -13,17 +13,31 @@
 <script>
 import Button from "./Button";
 import { CartItem } from "../services/cartItem";
-import CartStore from "../stores/cartStore";
+import CartStore from "../stores/CartStore/CartStore";
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "Food",
   components: { Button },
+  store: CartStore,
   props: {
     food: { type: Object },
   },
+  computed: { ...mapGetters(["cart"]) },
   methods: {
+    ...mapActions(["addItem", "removeItem", "totalItemsCount", "totalPrice"]),
+
     handleClick() {
-      const cartItem = new CartItem(this.food, 1);
-      CartStore.addItem(cartItem);
+      const existingFood = this.cart.line_items.find(
+        (i) => i.id === this.food.id
+      );
+      if (!existingFood) {
+        const cartItem = new CartItem(this.food, 1);
+        this.addItem(cartItem);
+      } else {
+        existingFood.updateQuantity(existingFood.quantity + 1);
+        this.totalItemsCount();
+        this.totalPrice();
+      }
     },
   },
 };

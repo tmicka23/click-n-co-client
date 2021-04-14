@@ -19,9 +19,12 @@ import Navbar from "./components/Navbar";
 import HeroBanner from "./components/HeroBanner";
 import Foods from "./components/Foods";
 import Cart from "./components/Cart";
+import CartStore from "./stores/CartStore/CartStore";
+import { mapActions } from "vuex";
 export default {
   name: "App",
   components: { Navbar, HeroBanner, Foods, Cart },
+  store: CartStore,
   data() {
     return {
       foods: [],
@@ -33,9 +36,11 @@ export default {
     FOODS_API.get(
       "/recipes/complexSearch?cuisine=italian&number=20&addRecipeInformation=true"
     ).then((res) => (this.foods = res.data.results));
+    this.initCart();
   },
 
   methods: {
+    ...mapActions(["saveCartInLocalStorage", "initCart"]),
     handleClose() {
       this.cartIsOpen = false;
     },

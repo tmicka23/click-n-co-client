@@ -1,9 +1,6 @@
 import Vue from "vue";
 import App from "./App.vue";
 import dotenv from "dotenv";
-import Vuex from "vuex";
-
-Vue.use(Vuex);
 
 dotenv.config();
 

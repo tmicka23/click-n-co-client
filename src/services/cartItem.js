@@ -5,13 +5,19 @@ export class CartItem {
     this.item = item;
     this.id = this.item.id;
     this.quantity = quantity;
-    this.price = rounded(
-      parseFloat(this.item.pricePerServing / this.item.servings / 4) *
-        this.quantity
-    );
+    this.defaultPrice = 0;
   }
 
   updateQuantity(value) {
     rounded((this.quantity = parseInt(value)));
+  }
+
+  get price() {
+    const newPrice = rounded(
+      parseFloat(this.item.pricePerServing / this.item.servings / 4) *
+        this.quantity
+    );
+    this.defaultPrice = newPrice;
+    return this.defaultPrice;
   }
 }
