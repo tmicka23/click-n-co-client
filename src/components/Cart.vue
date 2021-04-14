@@ -25,6 +25,7 @@
           type="email"
           name="email"
           id="email"
+          :value="cart.email"
           @change="handleEmail"
           placeholder="your@email.com"
         />
@@ -40,6 +41,7 @@ import { mapActions, mapGetters } from "vuex";
 import CartStore from "../stores/CartStore/CartStore";
 import Button from "./Button.vue";
 import CartItem from "./CartItem";
+import API from "../services/API";
 export default {
   name: "Cart",
   store: CartStore,
@@ -51,9 +53,23 @@ export default {
   },
 
   methods: {
-    ...mapActions(["addEmail"]),
+    ...mapActions(["addEmail", "resetCart"]),
     handleClick() {
-      console.log(this.cart);
+      const data = {
+        ...this.cart,
+        line_items: this.cart.line_items.slice().map((i) => {
+          return {
+            id: i.id,
+            quantity: i.quantity,
+            price: i.price,
+            name: i.item.title,
+          };
+        }),
+      };
+
+      API.post("/orders", data)
+        .then(() => this.resetCart())
+        .catch((err) => console.error(err));
     },
 
     handleEmail(e) {

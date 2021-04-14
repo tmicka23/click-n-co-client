@@ -58,6 +58,12 @@ const mutations = {
     state.total_items = newState.total_items;
     state.total_price = newState.total_price;
   },
+  RESET_CART(state) {
+    state.email = null;
+    state.line_items = [];
+    state.total_items = 0;
+    state.total_price = 0;
+  },
 };
 
 const actions = {
@@ -114,6 +120,11 @@ const actions = {
     if (savedCart) {
       store.commit("INIT_CART", savedCart);
     }
+  },
+
+  resetCart(store) {
+    store.commit("RESET_CART");
+    store.dispatch("saveCartInLocalStorage");
   },
 };
 
