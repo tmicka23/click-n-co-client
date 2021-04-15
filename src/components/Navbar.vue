@@ -1,11 +1,11 @@
 <template>
   <nav class="navbar">
-    <div class="brand">
+    <router-link to="/" class="brand">
       <img :src="logo" alt="click'n'co" />
-    </div>
+    </router-link>
 
     <div class="navbar-end">
-      <a href="#foods">Foods</a>
+      <a href="/#foods">Foods</a>
 
       <div class="navbar-cart">
         <img :src="cartImg" alt="cart" @click="handleCartOpen" />

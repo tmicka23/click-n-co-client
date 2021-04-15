@@ -1,46 +1,26 @@
 <template>
   <div id="app">
-    <header>
-      <Navbar :handleCartOpen="handleCartOpen" />
-      <HeroBanner />
-      <img class="shape" :src="shape" alt="click'n'co shape" />
-    </header>
-    <main>
-      <Cart :isOpen="cartIsOpen" :handleClose="handleClose" />
-      <Foods :foods="foods" />
-    </main>
+    <Navbar :handleCartOpen="handleCartOpen" />
+    <Cart :isOpen="cartIsOpen" :handleClose="handleClose" />
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import FOODS_API from "./services/FOODS_API";
-import shape from "./assets/shape.svg";
 import Navbar from "./components/Navbar";
-import HeroBanner from "./components/HeroBanner";
-import Foods from "./components/Foods";
 import Cart from "./components/Cart";
 import CartStore from "./stores/CartStore/CartStore";
-import { mapActions } from "vuex";
 export default {
   name: "App",
-  components: { Navbar, HeroBanner, Foods, Cart },
+  components: { Navbar, Cart },
   store: CartStore,
   data() {
     return {
-      foods: [],
-      shape,
       cartIsOpen: false,
     };
   },
-  mounted() {
-    FOODS_API.get(
-      "/recipes/complexSearch?cuisine=italian&number=20&addRecipeInformation=true"
-    ).then((res) => (this.foods = res.data.results));
-    this.initCart();
-  },
 
   methods: {
-    ...mapActions(["saveCartInLocalStorage", "initCart"]),
     handleClose() {
       this.cartIsOpen = false;
     },
@@ -75,20 +55,5 @@ p {
   font-weight: 300;
   line-height: 20px;
   letter-spacing: 1px;
-}
-
-.shape {
-  display: none;
-}
-
-@media screen and (min-width: 992px) {
-  .shape {
-    display: block;
-    width: 70vw;
-    position: absolute;
-    top: -50px;
-    right: 0;
-    z-index: -1;
-  }
 }
 </style>

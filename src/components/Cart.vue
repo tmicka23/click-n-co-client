@@ -68,8 +68,15 @@ export default {
       };
 
       API.post("/orders", data)
-        .then(() => this.resetCart())
-        .catch((err) => console.error(err));
+        .then((res) => {
+          this.resetCart();
+          this.$toast.success("Order successfully registered");
+          this.$router.push(`/orders/${res.data.id}`);
+        })
+        .catch((err) => {
+          console.error(err);
+          this.$toast.error("An error occurred while registering your order");
+        });
     },
 
     handleEmail(e) {
